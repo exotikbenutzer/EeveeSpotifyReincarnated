@@ -17,9 +17,14 @@ WORK=$(mktemp -d); trap 'rm -rf "$WORK"' EXIT
 APP=$(find "$WORK/Payload" -maxdepth 2 -name '*.app' -type d | head -1)
 [ -n "$APP" ] || { echo "no .app under Payload/" >&2; exit 1; }
 
+rm -rf \
+    "$APP/Watch" \
+    "$APP/WatchKit" \
+    "$APP/WatchKitSupport" \
+    "$APP/com.apple.WatchPlaceholder" \
+    "$WORK/Payload/WatchKitSupport"
 
 # Catches anything nested (frameworks, odd layouts) the top-level rm missed.
-
 
 leftover=$(
     find "$APP" -name 'Info.plist' -not -path '*/_CodeSignature/*' -exec sh -c '
