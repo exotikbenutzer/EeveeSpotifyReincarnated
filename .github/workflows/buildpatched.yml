@@ -140,7 +140,7 @@ jobs:
           # cyan: -du strips appex/Watch (we don't have a wildcard profile),
           # -m 15.0 sets MinimumOSVersion floor, -c 9 max compression.
           cyan -i ${{ github.workspace }}/spotify.ipa -o "$OUT" \
-               -f "${INJECT[@]}" -c 9 -m 15.0 -du
+               -f "${INJECT[@]}" -c 9 -m 15.0 -w
           echo "OUT_IPA=$OUT" >> $GITHUB_ENV
 
       - name: LC-inject zxPluginsInject (ipapatch)
